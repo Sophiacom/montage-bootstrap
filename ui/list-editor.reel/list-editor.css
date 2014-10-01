@@ -1,0 +1,21 @@
+.ListEditor {
+    display: block;
+}
+
+.ListEditor ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.ListEditor li {
+    display: inline;
+}
+
+.ListEditor ul li button:hover {
+    text-decoration: line-through;
+    color: #DB000F;
+}
+.ListEditor ul li button:focus, .ListEditor ul li button:active {
+    outline: 0;
+}

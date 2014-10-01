@@ -1,0 +1,167 @@
+/*!
+ * Timepicker Component for Twitter Bootstrap
+ *
+ * Copyright 2013 Joris de Wit
+ *
+ * Contributors https://github.com/jdewit/bootstrap-timepicker/graphs/contributors
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+.bootstrap-timepicker {
+    position: relative;
+
+    &.pull-right {
+        .bootstrap-timepicker-widget {
+            &.dropdown-menu {
+                left: auto;
+                right: 0;
+
+                &:before {
+                    left: auto;
+                    right: 12px;
+                }
+                &:after {
+                    left: auto;
+                    right: 13px;
+                }
+            }
+        }
+    }
+
+    .add-on {
+        cursor: pointer;
+        span {
+           display: inline-block;
+           width: 16px;
+           height: 16px;
+        }
+    }
+}
+.bootstrap-timepicker-widget {
+    &.dropdown-menu {
+        display: block;
+        min-width: 0;
+
+        span {
+            margin: 0;
+            padding: 0;
+            height: 0;
+            width: 0;
+            &.montage-invisible {
+                display: none;
+            }
+        }
+
+        &.montage-invisible {
+            display: none;
+        }
+
+        padding: 2px 3px 2px 2px;
+        &.open {
+            display: inline-block;
+        }
+        &:before {
+            border-bottom: 7px solid rgba(0, 0, 0, 0.2);
+            border-left: 7px solid transparent;
+            border-right: 7px solid transparent;
+            content: "";
+            display: inline-block;
+            left: 9px;
+            position: absolute;
+            top: -7px;
+        }
+        &:after {
+            border-bottom: 6px solid #FFFFFF;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            content: "";
+            display: inline-block;
+            left: 10px;
+            position: absolute;
+            top: -6px;
+        }
+    }
+
+    button.btn, input {
+        border-radius: 4px;
+    }
+
+    div.TimepickerUnit {
+        margin: 0;
+
+        display: inline-block;
+
+        div {
+            display: block;
+            text-align: center;
+            height: 40px;
+            margin: 0;
+            padding: 2px;
+
+            &:not(.separator) {
+                min-width: 30px;
+            }
+
+            span {
+                width: 100%;
+            }
+            button {
+                border: 1px transparent solid;
+                width: 100%;
+                display: inline;
+                margin: 0;
+                padding: 8px 0;
+                outline: 0;
+                color: #333;
+                background-color: rgba(255, 255, 255, 0);
+                border: 0;
+
+                &:hover {
+                    text-decoration: none;
+                    background-color: #eee;
+                    -webkit-border-radius: 4px;
+                    -moz-border-radius: 4px;
+                    border-radius: 4px;
+                    border-color: #ddd;
+                }
+
+                span {
+                    margin-top: 2px;
+                }
+            }
+            input {
+                &.form-control, &.form-control:last-child, &.form-control:first-child {
+                    padding: 4px 6px;
+                    width: 40px;
+                    margin: 0;
+                    text-align: center;
+                    border-radius: 4px;
+                }
+            }
+        }
+    }
+}
+
+.bootstrap-timepicker-widget .modal-content {
+    padding: 4px;
+}
+
+@media (min-width: 767px) {
+    .bootstrap-timepicker-widget.modal {
+        width: 200px;
+        margin-left: -100px;
+    }
+}
+
+@media (max-width: 767px) {
+    .bootstrap-timepicker {
+        width: 100%;
+
+        .dropdown-menu {
+            width: 100%;
+        }
+    }
+}
+

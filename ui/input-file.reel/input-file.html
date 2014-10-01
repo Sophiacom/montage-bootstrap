@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="input-file.css">
+    <script type="text/montage-serialization">
+    {
+        "owner": {
+            "properties": {
+                "element": {"#": "owner"},
+                "inputFile": {"#": "inputFile"}
+            }
+        },
+
+        "file": {
+            "prototype": "ui/text.reel",
+            "properties": {
+                "element": {"#": "file"}
+            },
+            "bindings": {
+                "value": {"<-": "@owner.fileName"}
+            }
+        },
+
+        "deleteButton": {
+            "prototype": "ui/button.reel",
+            "properties": {
+                "element": {"#": "deleteButton"}
+            },
+            "listeners": [
+                {
+                    "type": "action",
+                    "capture": true,
+                    "listener": {"@": "owner"}
+                }
+            ]
+        }
+    }
+    </script>
+</head>
+<body>
+    <div data-montage-id="owner" class="input-group InputFile">
+        <span class="input-group-btn">
+            <span class="btn btn-primary btn-file">
+                <span class="glyphicon glyphicon-file"></span>
+                <input type="file" data-montage-id="inputFile" accept="application/x-pkcs12" />
+            </span>
+        </span>
+        <div data-montage-id="file" class="form-control" readonly></div>
+        <span class="input-group-btn">
+            <button data-montage-id="deleteButton" class="btn btn-danger">
+                <span class="glyphicon glyphicon-remove"></span>
+            </button>
+        </span>
+    </div>
+</body>
+</html>

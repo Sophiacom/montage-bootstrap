@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="list-editor.css">
+    <script type="text/montage-serialization">
+    {
+        "owner": {
+            "properties": {
+                "element": {"#": "listEditor"},
+                "inputElement": {"@": "inputElement"},
+                "repetition": {"@": "repetition"}
+            }
+        },
+        "repetition": {
+            "prototype": "montage/ui/repetition.reel",
+            "properties": {
+                "element": {"#": "repetition"}
+            },
+            "bindings": {
+                "content": {"<-": "@owner.list"}
+            }
+        },
+        "listButton": {
+            "prototype": "ui/button.reel",
+            "properties": {
+                "element": {"#": "listButton"}
+            },
+            "bindings": {
+                "label": {"<-": "@repetition:iteration.object"},
+                "detail.index": {"<-": "@repetition:iteration.index"}
+            },
+            "listeners": [
+                {
+                    "type": "action",
+                    "capture": true,
+                    "listener": {"@": "owner"}
+                }
+            ]
+        },
+        "addButton": {
+            "prototype": "ui/button.reel",
+            "properties": {
+                "element": {"#": "addButton"}
+            },
+            "listeners": [
+                {
+                    "type": "action",
+                    "capture": true,
+                    "listener": {"@": "owner"}
+                }
+            ]
+        },
+        "inputElement": {
+            "prototype": "ui/input-text.reel",
+            "properties": {
+                "element": {"#": "inputElement"}
+            }
+        }
+    }
+    </script>
+</head>
+<body>
+    <div data-montage-id="listEditor" class="ListEditor form-group">
+        <div class="col-md-3 input-group">
+            <input data-montage-id="inputElement" class="ListTextField"></input>
+            <span class="input-group-btn">
+                <button data-montage-id="addButton" class="btn btn-default">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </button>
+            </span>
+        </div>
+        <ul data-montage-id="repetition">
+            <li>
+                <button data-montage-id="listButton"class="btn btn-link"></button>
+            </li>
+        </ul>
+    </div>
+</body>

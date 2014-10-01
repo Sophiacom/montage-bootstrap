@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="timepicker-unit.css">
+    <script type="text/montage-serialization">
+    {
+        "owner": {
+            "properties": {
+                "element": {"#": "timepickerUnit"},
+                "unitInput": {"@": "unitInput"},
+                "incrementButton": {"@": "incrementButton"},
+                "decrementButton": {"@": "decrementButton"}
+            }
+        },
+
+        "unitInput": {
+            "prototype": "ui/input-text.reel",
+            "properties": {
+                "element": {"#": "unitInput"}
+            },
+            "bindings": {
+                "value": {"<->": "@owner.value"}
+            }
+        },
+
+        "incrementButton": {
+            "prototype": "ui/button.reel",
+            "properties": {
+                "element": {"#": "incrementButton"}
+            }
+        },
+
+        "decrementButton": {
+            "prototype": "ui/button.reel",
+            "properties": {
+                "element": {"#": "decrementButton"}
+            }
+        }
+    }
+    </script>
+</head>
+<body>
+    <div data-montage-id="timepickerUnit" class="TimepickerUnit">
+        <div class="up">
+            <button data-montage-id="incrementButton">
+                <span class="glyphicon glyphicon-chevron-up"></span>
+            </button>
+        </div>
+        <div class="middle">
+            <input type="text" data-montage-id="unitInput" class="bootstrap-timepicker-hour form-control" maxlength="2"/>
+        </div>
+        <div class="down">
+            <button data-montage-id="decrementButton">
+                <span class="glyphicon glyphicon-chevron-down"></span>
+            </button>
+        </div>
+    </div>
+</body>
+</html>

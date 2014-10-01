@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="select.css">
+    <script type="text/montage-serialization">
+        {
+            "owner": {
+                "properties": {
+                    "element": {"#": "owner"},
+                    "dropdown": {"@": "dropdown"}
+                }
+            },
+
+            "dropdown": {
+                "prototype": "ui/dropdown.reel",
+                "properties": {
+                    "element": {"#": "dropdown"},
+                    "type": "click"
+                }
+            },
+
+            "dropdownButton": {
+                "prototype": "ui/button.reel",
+                "properties": {
+                    "element": {"#": "dropdownButton"}
+                },
+                "bindings": {
+                    "label": {"<-": "@owner._label(@owner._selected)"}
+                }
+            },
+
+            "list": {
+                "prototype": "montage/ui/repetition.reel",
+                "properties": {
+                    "element": {"#": "list"}
+                },
+                "bindings": {
+                    "content": {"<-": "@owner.content"}
+                }
+            },
+
+            "entry": {
+                "prototype": "ui/button.reel",
+                "properties": {
+                    "element": {"#": "entry"}
+                },
+                "bindings": {
+                    "label": {"<-": "@owner._label(@list:iteration.object)"},
+                    "detail.entry": {"<-": "@list:iteration.object"}
+                },
+                "listeners": [{
+                    "type": "action",
+                    "listener": {"@": "owner"},
+                    "capture": true
+                }]
+            }
+        }
+    </script>
+</head>
+<body>
+    <div data-montage-id="owner" class="Select">
+        <div data-montage-id="dropdown">
+            <a data-montage-id="dropdownButton" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                <span class="caret"></span>
+            </a>
+            <ul data-montage-id="list" class="dropdown-menu">
+                <li><a data-montage-id="entry"></a></li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
