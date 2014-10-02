@@ -14,19 +14,19 @@ exports.TextArea = AbstractTextArea.specialize(/** @lends TextArea# */ {
     constructor: {
         value: function TextArea() {
             this.super();
-
-            this.classList.add("form-control");
         }
     },
 
     rows: {value: null},
 
-    draw: {
-        value: function() {
-            this.super();
+    enterDocument: {
+        value: function(firstTime) {
+            this.super(firstTime);
 
-            if (this.rows != null) {
-                this.element.setAttribute("rows", this.rows);
+            if (firstTime){
+                this.defineBindings({
+                    "element.rows": { "<-": "rows" }
+                });
             }
         }
     }
