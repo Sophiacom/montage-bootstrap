@@ -23,7 +23,9 @@ exports.InputCheckbox = AbstractCheckbox.specialize(/** @lends InputCheckbox# */
             if(firstDraw) {
                 this.classList.clear();
 
-                this.element.disabled = !this.enabled;
+                this.defineBindings({
+                    "element.disabled": { "<-": "!enabled" }
+                });
             }
         }
     },
