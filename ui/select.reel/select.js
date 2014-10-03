@@ -43,9 +43,9 @@ exports.Select = Component.specialize( /** @lends Select# */ {
     /*
      * array of possible objects
      */
-    content: {
-        value: null
-    },
+    content: { value: null },
+
+    allowsNull: { value: false },
 
     /*
      * value of the curently selected object
@@ -54,13 +54,15 @@ exports.Select = Component.specialize( /** @lends Select# */ {
         value: null
     },
 
+    nullLabel: {
+        value: "N/A"
+    },
 
     enterDocument: {
         value: function(firstTime) {
             this.super(firstTime);
 
             if (firstTime) {
-                var comparePropertyName = this.comparePropertyName ? this.comparePropertyName : this.valuePropertyName;
                 var self = this;
                 if (this.comparePropertyName)
                     this._compareValues = function(x, y) {
@@ -80,24 +82,34 @@ exports.Select = Component.specialize( /** @lends Select# */ {
                         "<->": "value",
                         convert: function(value) {
                             if (value && self.content) {
-                                for (var i = 0; i < self.content.length; i++)
-                                    if (self._compareValues(value, self.content[i]))
+                                for (var i = 0; i < self.content.length; i++){
+                                    if (self.content[i] && self._compareValues(value, self.content[i])){
                                         return self.content[i];
-                                console.warn("\"" + self._label(value) + "\" not in possible values.");
+                                    }
+                                }
+                                console.warn('"' + self._label(value) + '" not in possible values.');
                             }
-                            if(self.content)
+
+                            if (self.allowsNull){
+                                return null;
+                            }
+
+                            if(self.content){
                                 return self.content[0];
+                            }
 
                             return null;
                         },
                         revert: function(value) {
-                            if (!value)
+                            if (!value){
                                 return null;
+                            }
 
-                            if (self.valuePropertyName)
+                            if (self.valuePropertyName) {
                                 return value[self.valuePropertyName];
-                            else
+                            } else {
                                 return value;
+                            }
                         }
                     }
                 });
@@ -115,8 +127,9 @@ exports.Select = Component.specialize( /** @lends Select# */ {
 
     _label: {
         value: function(item) {
-            if (this.labelPropertyName)
+            if (this.labelPropertyName){
                 return item[this.labelPropertyName];
+            }
             return item;
         }
     },

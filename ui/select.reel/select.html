@@ -9,6 +9,9 @@
                 "properties": {
                     "element": {"#": "owner"},
                     "dropdown": {"@": "dropdown"}
+                },
+                "bindings": {
+                    "_selectContent": {"<-": "allowsNull ? [null].concat(content) : content"}
                 }
             },
 
@@ -26,7 +29,7 @@
                     "element": {"#": "dropdownButton"}
                 },
                 "bindings": {
-                    "label": {"<-": "@owner._label(@owner._selected)"}
+                    "label": {"<-": "@owner._label(@owner._selected) ?? @owner.nullLabel"}
                 }
             },
 
@@ -36,7 +39,7 @@
                     "element": {"#": "list"}
                 },
                 "bindings": {
-                    "content": {"<-": "@owner.content"}
+                    "content": {"<-": "@owner._selectContent"}
                 }
             },
 
@@ -46,7 +49,7 @@
                     "element": {"#": "entry"}
                 },
                 "bindings": {
-                    "label": {"<-": "@owner._label(@list:iteration.object)"},
+                    "label": {"<-": "@owner._label(@list:iteration.object) ?? @owner.nullLabel"},
                     "detail.entry": {"<-": "@list:iteration.object"}
                 },
                 "listeners": [{
@@ -62,7 +65,7 @@
     <div data-montage-id="owner" class="Select">
         <div data-montage-id="dropdown">
             <a data-montage-id="dropdownButton" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                <span class="caret"></span>
+                <span>&nbsp;</span><span class="caret"></span>
             </a>
             <ul data-montage-id="list" class="dropdown-menu">
                 <li><a data-montage-id="entry"></a></li>
