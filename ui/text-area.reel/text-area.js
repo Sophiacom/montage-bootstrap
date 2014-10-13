@@ -7,27 +7,26 @@ var AbstractTextArea = require("montage/ui/base/abstract-text-area").AbstractTex
  * @class TextArea
  * @extends Component
  */
-exports.TextArea = AbstractTextArea.specialize(/** @lends TextArea# */ {
+exports.TextArea = AbstractTextArea.specialize( /** @lends TextArea# */ {
 
-    hasTemplate: {value: false},
+    hasTemplate: {
+        value: false
+    },
 
     constructor: {
         value: function TextArea() {
             this.super();
+
+            this.defineBindings({
+                "element.rows": {
+                    "<-": "rows"
+                }
+            });
+            this.classList.add('form-control');
         }
     },
 
-    rows: {value: null},
-
-    enterDocument: {
-        value: function(firstTime) {
-            this.super(firstTime);
-
-            if (firstTime){
-                this.defineBindings({
-                    "element.rows": { "<-": "rows" }
-                });
-            }
-        }
+    rows: {
+        value: null
     }
 });
