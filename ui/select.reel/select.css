@@ -1,3 +1,7 @@
 .Select {
 
 }
+
+.dropdown-toggle, .dropdown-menu {
+    width: 100%;
+}
