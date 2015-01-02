@@ -26,6 +26,14 @@ exports.Button = AbstractButton.specialize( /** @lends Button# */ {
         value: null
     },
 
+    enabled: {
+        value: true
+    },
+
+    visible: {
+        value: true
+    },
+
     enterDocument: {
         value: function(firstDraw) {
             this.super(firstDraw);
@@ -36,7 +44,8 @@ exports.Button = AbstractButton.specialize( /** @lends Button# */ {
                 }
 
                 this.defineBindings({
-                    "classList.has('disabled')": { "<-": "!enabled" }
+                    "classList.has('disabled')": {"<-": "!enabled"},
+                    "classList.has('hidden')": {"<-": "!visible"}
                 });
             }
         }
