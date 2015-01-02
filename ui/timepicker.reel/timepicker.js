@@ -23,6 +23,10 @@ exports.Timepicker = Component.specialize( /** @lends Timepicker# */ {
         }
     },
 
+    enabled: {
+        value: true
+    },
+
     /**
      * Dispatched when the user dismiss the dropdown by clicking outside of it.
      * @event dismiss
