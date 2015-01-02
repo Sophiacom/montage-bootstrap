@@ -34,18 +34,38 @@ exports.Button = AbstractButton.specialize( /** @lends Button# */ {
         value: true
     },
 
+    style: {
+        value: null
+    },
+
+    block: {
+        value: false
+    },
+
+    size: {
+        value: null
+    },
+
     enterDocument: {
         value: function(firstDraw) {
             this.super(firstDraw);
 
             if (firstDraw) {
-                if (this.originalElement.tagName === "BUTTON") {
-                    this.classList.add("btn");
-                }
-
                 this.defineBindings({
                     "classList.has('disabled')": {"<-": "!enabled"},
-                    "classList.has('hidden')": {"<-": "!visible"}
+                    "classList.has('hidden')": {"<-": "!visible"},
+                    "classList.has('btn')": {"<-": "style.defined()"},
+                    "classList.has('btn-default')": {"<-": "style == 'default'"},
+                    "classList.has('btn-primary')": {"<-": "style == 'primary'"},
+                    "classList.has('btn-success')": {"<-": "style == 'success'"},
+                    "classList.has('btn-info')": {"<-": "style == 'info'"},
+                    "classList.has('btn-warning')": {"<-": "style == 'warning'"},
+                    "classList.has('btn-danger')": {"<-": "style == 'danger'"},
+                    "classList.has('btn-link')": {"<-": "style == 'link'"},
+                    "classList.has('btn-block')": {"<-": "block"},
+                    "classList.has('btn-lg')": {"<-": "size == 'lg'"},
+                    "classList.has('btn-sm')": {"<-": "size == 'sm'"},
+                    "classList.has('btn-xs')": {"<-": "size == 'xs'"}
                 });
             }
         }
