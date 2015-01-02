@@ -15,6 +15,9 @@ exports.ListEditor = Component.specialize(/** @lends ListEditor# */ {
             this.super();
         }
     },
+    enabled: {
+        value: true
+    },
     list: {
         value: []
     },

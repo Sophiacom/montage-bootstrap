@@ -24,7 +24,8 @@
         "listButton": {
             "prototype": "ui/button.reel",
             "properties": {
-                "element": {"#": "listButton"}
+                "element": {"#": "listButton"},
+                "style": "link"
             },
             "bindings": {
                 "label": {"<-": "@repetition:iteration.object"},
@@ -36,12 +37,16 @@
                     "capture": true,
                     "listener": {"@": "owner"}
                 }
-            ]
+            ],
+            "bindings": {
+                "enabled": {"<-": "@owner.enabled"}
+            }
         },
         "addButton": {
             "prototype": "ui/button.reel",
             "properties": {
-                "element": {"#": "addButton"}
+                "element": {"#": "addButton"},
+                "style": "default"
             },
             "listeners": [
                 {
@@ -49,12 +54,18 @@
                     "capture": true,
                     "listener": {"@": "owner"}
                 }
-            ]
+            ],
+            "bindings": {
+                "enabled": {"<-": "@owner.enabled"}
+            }
         },
         "inputElement": {
             "prototype": "ui/input-text.reel",
             "properties": {
                 "element": {"#": "inputElement"}
+            },
+            "bindings": {
+                "enabled": {"<-": "@owner.enabled"}
             }
         }
     }
@@ -65,14 +76,14 @@
         <div class="col-md-3 input-group">
             <input data-montage-id="inputElement" class="ListTextField"></input>
             <span class="input-group-btn">
-                <button data-montage-id="addButton" class="btn btn-default">
+                <button data-montage-id="addButton">
                     <span class="glyphicon glyphicon-plus"></span>
                 </button>
             </span>
         </div>
         <ul data-montage-id="repetition">
             <li>
-                <button data-montage-id="listButton"class="btn btn-link"></button>
+                <button data-montage-id="listButton"></button>
             </li>
         </ul>
     </div>
