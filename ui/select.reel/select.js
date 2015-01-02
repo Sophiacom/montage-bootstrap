@@ -47,6 +47,8 @@ exports.Select = Component.specialize( /** @lends Select# */ {
 
     allowsNull: { value: false },
 
+    enabled: { value: true },
+
     /*
      * value of the curently selected object
      */

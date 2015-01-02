@@ -29,7 +29,8 @@
                     "element": {"#": "dropdownButton"}
                 },
                 "bindings": {
-                    "label": {"<-": "@owner._label(@owner._selected) ?? @owner.nullLabel"}
+                    "label": {"<-": "@owner._label(@owner._selected) ?? @owner.nullLabel"},
+                    "enabled": {"<-": "@owner.enabled"}
                 }
             },
 
@@ -57,6 +58,16 @@
                     "listener": {"@": "owner"},
                     "capture": true
                 }]
+            },
+
+            "showCaretCondition": {
+                "prototype": "montage/ui/condition.reel",
+                "properties": {
+                    "element": {"#": "showCaretCondition"}
+                },
+                "bindings": {
+                    "condition": {"<-": "@owner.enabled"}
+                }
             }
         }
     </script>
@@ -65,7 +76,9 @@
     <div data-montage-id="owner" class="Select">
         <div data-montage-id="dropdown">
             <a data-montage-id="dropdownButton" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                <span>&nbsp;</span><span class="caret"></span>
+                <span data-montage-id="showCaretCondition">
+                    <span>&nbsp;</span><span class="caret"></span>
+                </span>
             </a>
             <ul data-montage-id="list" class="dropdown-menu">
                 <li><a data-montage-id="entry"></a></li>

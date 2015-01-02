@@ -20,6 +20,9 @@ exports.TextArea = AbstractTextArea.specialize( /** @lends TextArea# */ {
             this.defineBindings({
                 "element.rows": {
                     "<-": "rows"
+                },
+                "element.disabled": {
+                    "<-": "!enabled"
                 }
             });
             this.classList.add('form-control');

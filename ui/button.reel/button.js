@@ -36,7 +36,7 @@ exports.Button = AbstractButton.specialize( /** @lends Button# */ {
                 }
 
                 this.defineBindings({
-                    "element.disabled": { "<-": "!enabled" }
+                    "classList.has('disabled')": { "<-": "!enabled" }
                 });
             }
         }
