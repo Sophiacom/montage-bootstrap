@@ -46,6 +46,10 @@ exports.Button = AbstractButton.specialize( /** @lends Button# */ {
         value: null
     },
 
+    glyphicon: {
+        value: null
+    },
+
     enterDocument: {
         value: function(firstDraw) {
             this.super(firstDraw);
@@ -67,6 +71,14 @@ exports.Button = AbstractButton.specialize( /** @lends Button# */ {
                     "classList.has('btn-sm')": {"<-": "size == 'sm'"},
                     "classList.has('btn-xs')": {"<-": "size == 'xs'"}
                 });
+
+                if (!!this.glyphicon){
+                    var span = document.createElement("span");
+                    span.className = "glyphicon " + "glyphicon-" + this.glyphicon;
+                    var originalElement = this.element;
+                    originalElement.insertBefore(span, originalElement.childNodes[0]);
+                    originalElement.insertBefore(document.createTextNode(" "), span.nextSibling);
+                }
             }
         }
     },
