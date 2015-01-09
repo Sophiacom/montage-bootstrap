@@ -72,13 +72,7 @@ exports.Button = AbstractButton.specialize( /** @lends Button# */ {
                     "classList.has('btn-xs')": {"<-": "size == 'xs'"}
                 });
 
-                if (!!this.glyphicon){
-                    var span = document.createElement("span");
-                    span.className = "glyphicon " + "glyphicon-" + this.glyphicon;
-                    var originalElement = this.element;
-                    originalElement.insertBefore(span, originalElement.childNodes[0]);
-                    originalElement.insertBefore(document.createTextNode(" "), span.nextSibling);
-                }
+                this.addPathChangeListener("glyphicon.defined()", this, "handleGlyphiconChange");
             }
         }
     },
@@ -110,6 +104,21 @@ exports.Button = AbstractButton.specialize( /** @lends Button# */ {
                 this.label = this.labelSave;
             }
         }
+    },
+    
+    handleGlyphiconChange: {
+        value: function() {
+            var spanToRemove = this.element.childNodes[0];
+            if (spanToRemove.nodeType === 1 && spanToRemove.nodeName === "SPAN") {
+                this.element.removeChild(span);
+            }
+            if (!!this.glyphicon && this.label !== undefined) {
+                var span = document.createElement("span");
+                span.className = "glyphicon " + "glyphicon-" + this.glyphicon;
+                var originalElement = this.element;
+                originalElement.insertBefore(span, originalElement.childNodes[0]);
+                originalElement.insertBefore(document.createTextNode(" "), span.nextSibling);
+            }
+        }
     }
-
 });
