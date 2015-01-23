@@ -105,12 +105,12 @@ exports.Button = AbstractButton.specialize( /** @lends Button# */ {
             }
         }
     },
-    
+
     handleGlyphiconChange: {
         value: function() {
             var spanToRemove = this.element.childNodes[0];
             if (spanToRemove.nodeType === 1 && spanToRemove.nodeName === "SPAN") {
-                this.element.removeChild(span);
+                this.element.removeChild(spanToRemove);
             }
             if (!!this.glyphicon && this.label !== undefined) {
                 var span = document.createElement("span");
