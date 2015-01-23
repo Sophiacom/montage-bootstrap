@@ -51,10 +51,10 @@ exports.Button = AbstractButton.specialize( /** @lends Button# */ {
     },
 
     enterDocument: {
-        value: function(firstDraw) {
-            this.super(firstDraw);
+        value: function(firstTime) {
+            this.super(firstTime);
 
-            if (firstDraw) {
+            if (firstTime) {
                 this.defineBindings({
                     "classList.has('disabled')": {"<-": "!enabled"},
                     "classList.has('hidden')": {"<-": "!visible"},
@@ -71,9 +71,15 @@ exports.Button = AbstractButton.specialize( /** @lends Button# */ {
                     "classList.has('btn-sm')": {"<-": "size == 'sm'"},
                     "classList.has('btn-xs')": {"<-": "size == 'xs'"}
                 });
-
-                this.addPathChangeListener("glyphicon.defined()", this, "handleGlyphiconChange");
             }
+
+            this.addPathChangeListener("glyphicon.defined()", this, "handleGlyphiconChange");
+        }
+    },
+
+    exitDocument: {
+        value: function() {
+            this.removePathChangeListener("glyphicon.defined()", this);
         }
     },
 
