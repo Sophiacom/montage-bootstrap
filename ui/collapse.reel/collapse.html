@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="collapse.css">
+    <script type="text/montage-serialization">
+    {
+        "owner": {
+            "properties": {
+                "element": {"#": "owner"},
+                "collapseBody": {"#": "collapse-body"}
+            }
+        },
+        
+        "toggleButton": {
+            "prototype": "/ui/button.reel",
+            "properties": {
+                "element": {"#": "toggleButton"}
+            },
+            "bindings": {
+                "glyphicon": {"<->": "@owner.glyphicon"},
+                "style": {"<->": "@owner.style"},
+                "size": {"<->": "@owner.size"},
+                "label": {"<->": "@owner.label"}
+            },
+            "listeners": [
+                {
+                   "type": "action",
+                    "listener": {"@": "owner"},
+                    "capture": true
+                }
+            ]
+        }
+    }
+    </script>
+</head>
+<body>
+    <div data-montage-id="owner" class="Collapse">
+        <button data-montage-id="toggleButton" class="CollapseToggleButton"></button>
+        <div class="collapse" data-montage-id="collapse-body">
+            <div class="well">
+                <span data-param="*"></span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
