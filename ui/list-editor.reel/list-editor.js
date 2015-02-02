@@ -13,14 +13,15 @@ exports.ListEditor = Component.specialize(/** @lends ListEditor# */ {
     constructor: {
         value: function ListEditor() {
             this.super();
+            this.list = [];
         }
     },
     enabled: {
         value: true
     },
     list: {
-        value: []
-    },
+        value: null
+    }
     textFieldShouldAcceptValue: {
         value: function() {
             return true;

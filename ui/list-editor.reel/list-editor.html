@@ -8,8 +8,7 @@
         "owner": {
             "properties": {
                 "element": {"#": "listEditor"},
-                "inputElement": {"@": "inputElement"},
-                "repetition": {"@": "repetition"}
+                "inputElement": {"@": "inputElement"}
             }
         },
         "repetition": {
@@ -28,6 +27,7 @@
                 "style": "link"
             },
             "bindings": {
+                "enabled": {"<-": "@owner.enabled"},
                 "label": {"<-": "@repetition:iteration.object"},
                 "detail.index": {"<-": "@repetition:iteration.index"}
             },
@@ -37,10 +37,7 @@
                     "capture": true,
                     "listener": {"@": "owner"}
                 }
-            ],
-            "bindings": {
-                "enabled": {"<-": "@owner.enabled"}
-            }
+            ]
         },
         "addButton": {
             "prototype": "ui/button.reel",
