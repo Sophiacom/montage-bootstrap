@@ -18,10 +18,10 @@
                 "element": {"#": "toggleButton"}
             },
             "bindings": {
-                "glyphicon": {"<->": "@owner.glyphicon"},
-                "style": {"<->": "@owner.style"},
-                "size": {"<->": "@owner.size"},
-                "label": {"<->": "@owner.label"}
+                "glyphicon": {"<-": "@owner.glyphicon"},
+                "style": {"<-": "@owner.style"},
+                "size": {"<-": "@owner.size"},
+                "label": {"<-": "@owner.label ?? ''"}
             },
             "listeners": [
                 {
