@@ -21,7 +21,7 @@ exports.ListEditor = Component.specialize(/** @lends ListEditor# */ {
     },
     list: {
         value: null
-    }
+    },
     textFieldShouldAcceptValue: {
         value: function() {
             return true;
