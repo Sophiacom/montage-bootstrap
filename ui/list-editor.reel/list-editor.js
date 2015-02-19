@@ -48,6 +48,9 @@ exports.ListEditor = Component.specialize(/** @lends ListEditor# */ {
             this.super();
 
             this.keyComposer.removeEventListener("keyPress", this.keyPressListener, false);
+
+            this.list = [];
+            this.inputElement.value = null;
         }
     },
     captureListButtonAction: {
@@ -57,7 +60,7 @@ exports.ListEditor = Component.specialize(/** @lends ListEditor# */ {
     },
     captureAddButtonAction: {
         value: function(){
-            var newValue = this.inputElement.value
+            var newValue = this.inputElement.value;
             if (newValue !== undefined && newValue !== null && newValue !== ""){
                 this.list.push(newValue);
                 this.inputElement.element.value = "";
