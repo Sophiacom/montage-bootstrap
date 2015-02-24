@@ -14,16 +14,14 @@ exports.Collapse = Component.specialize(/** @lends Collapse# */ {
             this.super();
         }
     },
-
+    
     captureToggleButtonAction: {
         value: function(event) {
-            if(this.collapseBody.classList.contains("collapse")) {
-                this.collapseBody.classList.remove("collapse");
-                this.collapseBody.classList.add("collapse.in");
+            if(this.collapseBody.classList.contains("in")) {
+                this.collapseBody.classList.remove("in");
             }
             else {
-                this.collapseBody.classList.remove("collapse.in");
-                this.collapseBody.classList.add("collapse");
+                this.collapseBody.classList.add("in");
             }
         }
     }
