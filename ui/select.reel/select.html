@@ -53,6 +53,7 @@
                 },
                 "bindings": {
                     "label": {"<-": "@owner._label(@list:iteration.object) ?? @owner.nullLabel"},
+                    "element.title": {"<-": "@owner._label(@list:iteration.object) ?? @owner.nullLabel"},
                     "detail.entry": {"<-": "@list:iteration.object"}
                 },
                 "listeners": [{
@@ -77,7 +78,7 @@
 <body>
     <div data-montage-id="owner" class="Select">
         <div data-montage-id="dropdown">
-            <a data-montage-id="dropdownButton" data-toggle="dropdown">
+            <a data-montage-id="dropdownButton" data-toggle="dropdown" class="dropdown-button">
                 <span data-montage-id="showCaretCondition">
                     <span>&nbsp;</span><span class="caret"></span>
                 </span>

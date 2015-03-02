@@ -5,3 +5,8 @@
 .dropdown-menu {
     width: 100%;
 }
+
+.Select .dropdown-button, .Select .dropdown-menu>li>a {
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
