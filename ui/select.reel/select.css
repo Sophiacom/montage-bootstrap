@@ -6,7 +6,13 @@
     width: 100%;
 }
 
-.Select .dropdown-button, .Select .dropdown-menu>li>a {
+.Select .dropdown-value, .Select .dropdown-menu>li>a {
 	overflow: hidden;
 	text-overflow: ellipsis;
+}
+
+.Select .dropdown-value {
+	display: inline-block;
+	width: 85%;
+	vertical-align: middle;
 }

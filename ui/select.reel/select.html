@@ -31,8 +31,17 @@
                     "block": true
                 },
                 "bindings": {
-                    "label": {"<-": "@owner._label(@owner._selected) ?? @owner.nullLabel"},
-                    "enabled": {"<-": "@owner.enabled"}
+                    "enabled": {"<-": "@owner.enabled"},
+                    "element.title": {"<-": "@owner._label(@owner._selected) ?? @owner.nullLabel"}
+                }
+            },
+            "dropdownText": {
+                "prototype": "ui/text.reel",
+                "properties": {
+                    "element": {"#": "dropdownText"}
+                },
+                "bindings": {
+                    "value": {"<-": "@owner._label(@owner._selected) ?? @owner.nullLabel"}
                 }
             },
 
@@ -78,7 +87,8 @@
 <body>
     <div data-montage-id="owner" class="Select">
         <div data-montage-id="dropdown">
-            <a data-montage-id="dropdownButton" data-toggle="dropdown" class="dropdown-button">
+            <a data-montage-id="dropdownButton" data-toggle="dropdown">
+                <span data-montage-id="dropdownText" class="dropdown-value"></span>
                 <span data-montage-id="showCaretCondition">
                     <span>&nbsp;</span><span class="caret"></span>
                 </span>
