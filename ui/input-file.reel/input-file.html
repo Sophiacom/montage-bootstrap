@@ -25,7 +25,9 @@
         "deleteButton": {
             "prototype": "ui/button.reel",
             "properties": {
-                "element": {"#": "deleteButton"}
+                "element": {"#": "deleteButton"},
+                "style": "danger",
+                "glyphicon": "remove"
             },
             "listeners": [
                 {
@@ -49,7 +51,6 @@
         <div data-montage-id="file" class="form-control" readonly></div>
         <span class="input-group-btn">
             <button data-montage-id="deleteButton" class="btn btn-danger">
-                <span class="glyphicon glyphicon-remove"></span>
             </button>
         </span>
     </div>
