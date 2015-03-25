@@ -13,7 +13,6 @@ exports.ListEditor = Component.specialize(/** @lends ListEditor# */ {
     constructor: {
         value: function ListEditor() {
             this.super();
-            this.list = [];
         }
     },
     enabled: {
@@ -62,6 +61,9 @@ exports.ListEditor = Component.specialize(/** @lends ListEditor# */ {
         value: function(){
             var newValue = this.inputElement.value;
             if (newValue !== undefined && newValue !== null && newValue !== ""){
+                if(!this.list) {
+                    this.list = [];
+                }
                 this.list.push(newValue);
                 this.inputElement.element.value = "";
                 this.inputElement.value = "";
