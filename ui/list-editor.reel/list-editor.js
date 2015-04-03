@@ -21,14 +21,14 @@ exports.ListEditor = Component.specialize(/** @lends ListEditor# */ {
     list: {
         value: null
     },
-    textFieldShouldAcceptValue: {
-        value: function() {
-            return true;
-        }
+    fieldValue: {
+        value: null
     },
     enterDocument: {
         value: function(){
             this.super();
+            if (!this.list)
+                this.list = [];
 
             var self = this;
             this.keyPressListener = {
@@ -59,14 +59,10 @@ exports.ListEditor = Component.specialize(/** @lends ListEditor# */ {
     },
     captureAddButtonAction: {
         value: function(){
-            var newValue = this.inputElement.value;
-            if (newValue !== undefined && newValue !== null && newValue !== ""){
-                if(!this.list) {
-                    this.list = [];
-                }
-                this.list.push(newValue);
-                this.inputElement.element.value = "";
-                this.inputElement.value = "";
+            if (!!this.fieldValue){
+                this.list.push(this.fieldValue);
+                this.fieldValue = null;
+                this.inputElement.element.value = null;
             }
             this.inputElement.element.focus();
         }

@@ -12,10 +12,10 @@
     display: inline;
 }
 
-.ListEditor ul li button:hover {
+.ListEditor ul li a:hover {
     text-decoration: line-through;
     color: #DB000F;
 }
-.ListEditor ul li button:focus, .ListEditor ul li button:active {
+.ListEditor ul li a:focus, .ListEditor ul li a:active {
     outline: 0;
 }

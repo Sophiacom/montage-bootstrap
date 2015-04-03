@@ -53,7 +53,7 @@
                 }
             ],
             "bindings": {
-                "enabled": {"<-": "@owner.enabled"}
+                "enabled": {"<-": "@owner.enabled && @owner.inputElement.value"}
             }
         },
         "inputElement": {
@@ -62,7 +62,8 @@
                 "element": {"#": "inputElement"}
             },
             "bindings": {
-                "enabled": {"<-": "@owner.enabled"}
+                "enabled": {"<-": "@owner.enabled"},
+                "value": {"<->": "@owner.fieldValue"}
             }
         }
     }
@@ -73,14 +74,14 @@
         <div class="col-md-3 input-group">
             <input data-montage-id="inputElement" class="ListTextField"></input>
             <span class="input-group-btn">
-                <button data-montage-id="addButton">
+                <a data-montage-id="addButton">
                     <span class="glyphicon glyphicon-plus"></span>
-                </button>
+                </a>
             </span>
         </div>
         <ul data-montage-id="repetition">
             <li>
-                <button data-montage-id="listButton"></button>
+                <a data-montage-id="listButton"></a>
             </li>
         </ul>
     </div>
