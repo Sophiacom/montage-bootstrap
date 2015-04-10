@@ -50,6 +50,10 @@ exports.Button = AbstractButton.specialize( /** @lends Button# */ {
         value: null
     },
 
+    fontAwesome: {
+        value: null
+    },
+
     enterDocument: {
         value: function(firstTime) {
             this.super(firstTime);
@@ -74,12 +78,14 @@ exports.Button = AbstractButton.specialize( /** @lends Button# */ {
             }
 
             this.addPathChangeListener("glyphicon.defined()", this, "handleGlyphiconChange");
+            this.addPathChangeListener("fontAwesome.defined()", this, "handleFontAwesomeChange");
         }
     },
 
     exitDocument: {
         value: function() {
             this.removePathChangeListener("glyphicon.defined()", this);
+            this.removePathChangeListener("fontAwesome.defined()", this);
         }
     },
 
@@ -114,16 +120,36 @@ exports.Button = AbstractButton.specialize( /** @lends Button# */ {
 
     handleGlyphiconChange: {
         value: function() {
-            var spanToRemove = this.element.childNodes[0];
-            if (spanToRemove.nodeType === 1 && spanToRemove.nodeName === "SPAN") {
-                this.element.removeChild(spanToRemove);
+            if (!!this.glyphicon) {
+                var spanToRemove = this.element.childNodes[0];
+                if (spanToRemove.nodeType === 1 && spanToRemove.nodeName === "SPAN") {
+                    this.element.removeChild(spanToRemove);
+                }
+                if (this.label !== undefined) {
+                    var span = document.createElement("span");
+                    span.className = "glyphicon " + "glyphicon-" + this.glyphicon;
+                    var originalElement = this.element;
+                    originalElement.insertBefore(span, originalElement.childNodes[0]);
+                    originalElement.insertBefore(document.createTextNode(" "), span.nextSibling);
+                }
             }
-            if (!!this.glyphicon && this.label !== undefined) {
-                var span = document.createElement("span");
-                span.className = "glyphicon " + "glyphicon-" + this.glyphicon;
-                var originalElement = this.element;
-                originalElement.insertBefore(span, originalElement.childNodes[0]);
-                originalElement.insertBefore(document.createTextNode(" "), span.nextSibling);
+        }
+    },
+
+    handleFontAwesomeChange: {
+        value: function() {
+            if (!!this.fontAwesome) {
+                var spanToRemove = this.element.childNodes[0];
+                if (spanToRemove.nodeType === 1 && spanToRemove.nodeName === "I") {
+                    this.element.removeChild(spanToRemove);
+                }
+                if (this.label !== undefined) {
+                    var span = document.createElement("i");
+                    span.className = "fa " + "fa-" + this.fontAwesome;
+                    var originalElement = this.element;
+                    originalElement.insertBefore(span, originalElement.childNodes[0]);
+                    originalElement.insertBefore(document.createTextNode(" "), span.nextSibling);
+                }
             }
         }
     }
