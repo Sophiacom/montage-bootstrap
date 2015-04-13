@@ -83,7 +83,7 @@ exports.Select = Component.specialize( /** @lends Select# */ {
                     "_selected": {
                         "<->": "value",
                         convert: function(value) {
-                            if (value && self.content) {
+                            if (value !== undefined && value !== null && self.content) {
                                 for (var i = 0; i < self.content.length; i++){
                                     if (self.content[i] && self._compareValues(value, self.content[i])){
                                         return self.content[i];
@@ -103,7 +103,7 @@ exports.Select = Component.specialize( /** @lends Select# */ {
                             return null;
                         },
                         revert: function(value) {
-                            if (!value){
+                            if (value === undefined || value === null){
                                 return null;
                             }
 
