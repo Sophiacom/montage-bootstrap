@@ -54,6 +54,10 @@ exports.Button = AbstractButton.specialize( /** @lends Button# */ {
         value: null
     },
 
+    type: {
+        value: "button"
+    },
+
     enterDocument: {
         value: function(firstTime) {
             this.super(firstTime);
@@ -73,7 +77,8 @@ exports.Button = AbstractButton.specialize( /** @lends Button# */ {
                     "classList.has('btn-block')": {"<-": "block"},
                     "classList.has('btn-lg')": {"<-": "size == 'lg'"},
                     "classList.has('btn-sm')": {"<-": "size == 'sm'"},
-                    "classList.has('btn-xs')": {"<-": "size == 'xs'"}
+                    "classList.has('btn-xs')": {"<-": "size == 'xs'"},
+                    "element.type": {"<-": "type"}
                 });
             }
 
