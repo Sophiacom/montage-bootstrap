@@ -20,16 +20,25 @@
                 "content": {"<-": "@owner.list"}
             }
         },
+        "listItem": {
+            "prototype": "ui/text.reel",
+            "properties":{
+                "element": {"#": "listItem"}
+            },
+            "bindings": {
+                "value": {"<->": "@repetition:iteration.object"}
+            }
+        },
         "listButton": {
             "prototype": "ui/button.reel",
             "properties": {
                 "element": {"#": "listButton"},
-                "style": "link"
+                "style": "danger",
+                "glyphicon": "remove"
             },
             "bindings": {
-                "enabled": {"<-": "@owner.enabled"},
-                "label": {"<-": "@repetition:iteration.object"},
-                "detail.index": {"<-": "@repetition:iteration.index"}
+                "detail.index": {"<-": "@repetition:iteration.index"},
+                "enabled": {"<-": "@owner.enabled"}
             },
             "listeners": [
                 {
@@ -70,19 +79,37 @@
     </script>
 </head>
 <body>
-    <div data-montage-id="listEditor" class="ListEditor form-group">
-        <div class="col-md-3 input-group">
-            <input data-montage-id="inputElement" class="ListTextField"></input>
-            <span class="input-group-btn">
-                <a data-montage-id="addButton">
-                    <span class="glyphicon glyphicon-plus"></span>
-                </a>
-            </span>
+    <div data-montage-id="listEditor">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-sm-4 pull-right">
+                        <div class="input-group">
+                            <input data-montage-id="inputElement" class="ListTextField"></input>
+                            <span class="input-group-btn">
+                                <a data-montage-id="addButton">
+                                    <span class="glyphicon glyphicon-plus"></span>
+                                </a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <ul data-montage-id="repetition" class="list-group">
+                <li class="list-group-item">
+                    <div class="row">
+                        <div class="col-xs-11">
+                            <span data-montage-id="listItem"></span>
+                        </div>
+                        <div class="col-xs-1">
+                            <div class="pull-right">
+                                <button data-montage-id="listButton"></button>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
         </div>
-        <ul data-montage-id="repetition">
-            <li>
-                <a data-montage-id="listButton"></a>
-            </li>
-        </ul>
     </div>
 </body>
