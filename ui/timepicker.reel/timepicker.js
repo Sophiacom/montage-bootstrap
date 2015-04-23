@@ -58,7 +58,6 @@ exports.Timepicker = Component.specialize( /** @lends Timepicker# */ {
             this.minuteStep = this.options.minuteStep;
             this.secondStep = this.options.secondStep;
             this.showInputs = this.options.showInputs;
-            this.showMeridian = this.options.showMeridian;
             this.showSeconds = this.options.showSeconds;
 
             var self = this;
@@ -359,6 +358,12 @@ exports.Timepicker = Component.specialize( /** @lends Timepicker# */ {
         }
     },
 
+    showMeridian: {
+        get: function() {
+            return new RegExp("[aA]").test(Moment.localeData().longDateFormat('LTS'));
+        }
+    },
+
     didDraw: {
         value: function(){
             this.super();
@@ -373,8 +378,7 @@ exports.Timepicker = Component.specialize( /** @lends Timepicker# */ {
             minuteStep: 1,
             secondStep: 15,
             showSeconds: false,
-            showInputs: true,
-            showMeridian: true
+            showInputs: true
         }
     },
 
