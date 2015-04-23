@@ -114,9 +114,8 @@
 .bootstrap-timepicker-widget div.TimepickerUnit div button span {
   margin-top: 2px;
 }
-.bootstrap-timepicker-widget div.TimepickerUnit div input.form-control,
-.bootstrap-timepicker-widget div.TimepickerUnit div input.form-control:last-child,
-.bootstrap-timepicker-widget div.TimepickerUnit div input.form-control:first-child {
+.bootstrap-timepicker-widget div.TimepickerUnit div input:first-child,
+.bootstrap-timepicker-widget div.TimepickerUnit div input:last-child {
   padding: 4px 6px;
   width: 40px;
   margin: 0;

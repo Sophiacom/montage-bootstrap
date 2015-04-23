@@ -639,6 +639,10 @@ exports.Timepicker = Component.specialize( /** @lends Timepicker# */ {
 
     highlightHour: {
         value: function() {
+            if (this.highlightedUnit === 'hour') {
+                return;
+            }
+
             var timeInput = this.templateObjects.timeInput.element;
             this.highlightedUnit = 'hour';
 
@@ -652,6 +656,10 @@ exports.Timepicker = Component.specialize( /** @lends Timepicker# */ {
 
     highlightMinute: {
         value: function() {
+            if (this.highlightedUnit === 'minute') {
+                return;
+            }
+
             var timeInput = this.templateObjects.timeInput.element;
             this.highlightedUnit = 'minute';
 
@@ -665,6 +673,10 @@ exports.Timepicker = Component.specialize( /** @lends Timepicker# */ {
 
     highlightSecond: {
         value: function() {
+            if (this.highlightedUnit === 'second') {
+                return;
+            }
+
             var timeInput = this.templateObjects.timeInput.element;
             this.highlightedUnit = 'second';
 
@@ -678,6 +690,10 @@ exports.Timepicker = Component.specialize( /** @lends Timepicker# */ {
 
     highlightMeridian: {
         value: function() {
+            if (this.highlightedUnit === 'meridian') {
+                return;
+            }
+
             var timeInput = this.templateObjects.timeInput.element;
             this.highlightedUnit = 'meridian';
 
