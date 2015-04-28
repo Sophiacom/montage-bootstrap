@@ -85,15 +85,9 @@ exports.Dropdown = Component.specialize( /** @lends DropdownLi# */ {
                 }
             };
 
-            this.dropdownClickHandler = {
-                handleClick: function(event) {
-                    if (self.isShown) {
-                        self.hide();
-                    } else {
-                        self.show();
-                    }
-                }
-            };
+            if(window.Touch) {
+                this.type = "click";
+            }
 
             if (this.type === "hover") {
                 if (this.toggleElement !== null) {
@@ -103,7 +97,7 @@ exports.Dropdown = Component.specialize( /** @lends DropdownLi# */ {
                     console.error('there is no element with attribute data-toggle="dropdown" in your dropdown component');
                 }
             } else if (this.type === "click") {
-                this.toggleElement.addEventListener("click", this.dropdownClickHandler, false);
+                this._addEventListeners();
                 this._pressComposer.addEventListener("pressStart", this, false);
             } else {
                 console.error("unknown dropdown type : " + this.type);
@@ -125,7 +119,7 @@ exports.Dropdown = Component.specialize( /** @lends DropdownLi# */ {
                     console.error('there is no element with attribute data-toggle="dropdown" in your dropdown component');
                 }
             } else if (this.type === "click") {
-                this.toggleElement.removeEventListener("click", this.dropdownClickHandler, false);
+                this._removeEventListeners();
                 this._pressComposer.removeEventListener("pressStart", this, false);
             }
 
@@ -137,6 +131,28 @@ exports.Dropdown = Component.specialize( /** @lends DropdownLi# */ {
         value: function(event) {
             if (!this.element.contains(event.targetElement)) {
                 this.dismissDropdown(event);
+            }
+        }
+    },
+
+    handleMousedown: {
+        value: function(event) {
+            this.clickAction();
+        }
+    },
+
+    handleTouchstart: {
+        value: function(event) {
+            this.clickAction();
+        }
+    },
+
+    clickAction: {
+        value: function() {
+            if (this.isShown) {
+                this.hide();
+            } else {
+                this.show();
             }
         }
     },
@@ -186,5 +202,27 @@ exports.Dropdown = Component.specialize( /** @lends DropdownLi# */ {
             this.classList.add("open");
             this._isShown = true;
         }
-    }
+    },
+
+    _addEventListeners: {
+        value: function() {
+            // support touching the scale to select only in Desktop
+            if(window.Touch) {
+                this.element.addEventListener('touchstart', this, false);
+            } else {
+                this.element.addEventListener('mousedown', this, false);
+            }
+        }
+    },
+
+    _removeEventListeners: {
+        value: function() {
+            // support touching the scale to select only in Desktop
+            if(window.Touch) {
+                this.element.removeEventListener('touchstart', this, false);
+            } else {
+                this.element.removeEventListener('mousedown', this, false);
+            }
+        }
+    },
 });
