@@ -135,7 +135,7 @@ exports.Dropdown = Component.specialize( /** @lends DropdownLi# */ {
         }
     },
 
-    handleMousedown: {
+    handleClick: {
         value: function(event) {
             this.clickAction();
         }
@@ -210,7 +210,7 @@ exports.Dropdown = Component.specialize( /** @lends DropdownLi# */ {
             if(window.Touch) {
                 this.element.addEventListener('touchstart', this, false);
             } else {
-                this.element.addEventListener('mousedown', this, false);
+                this.element.addEventListener('click', this, false);
             }
         }
     },
@@ -221,7 +221,7 @@ exports.Dropdown = Component.specialize( /** @lends DropdownLi# */ {
             if(window.Touch) {
                 this.element.removeEventListener('touchstart', this, false);
             } else {
-                this.element.removeEventListener('mousedown', this, false);
+                this.element.removeEventListener('click', this, false);
             }
         }
     },
