@@ -447,7 +447,6 @@ exports.Timepicker = Component.specialize( /** @lends Timepicker# */ {
         value: function() {
             this._refreshing = true;
 
-            var totalMillis = this.minute * 60 * 1000 + this.second * 1000;
             var hour = this.hour;
 
             if (this.showMeridian) {
@@ -460,12 +459,7 @@ exports.Timepicker = Component.specialize( /** @lends Timepicker# */ {
                 }
             }
 
-            var totalMillis = hour;
-            totalMillis = totalMillis * 60 + this.minute;
-            totalMillis = totalMillis * 60 + this.second;
-            totalMillis = totalMillis * 1000;
-
-            this.value = totalMillis;
+            this.value = Moment(0).hour(hour).minute(this.minute).second(this.second).valueOf();
 
             this._refreshing = false;
         }
