@@ -116,6 +116,15 @@ exports.Select = Component.specialize( /** @lends Select# */ {
                     }
                 });
             }
+
+            this.addPathChangeListener("content", this, "_updateValue");
+        }
+    },
+    exitDocument: {
+        value: function() {
+            this.super();
+
+            this.removePathChangeListener("content", this);
         }
     },
 
@@ -141,5 +150,11 @@ exports.Select = Component.specialize( /** @lends Select# */ {
             this._selected = event.detail.entry;
             this.dropdown.hide();
         }
-    }
+    },
+
+    _updateValue: {
+        value: function() {
+            this.dispatchOwnPropertyChange("value", this.value, false);
+        }
+    },
 });
