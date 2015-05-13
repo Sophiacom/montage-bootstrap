@@ -72,35 +72,31 @@ exports.Dropdown = Component.specialize( /** @lends DropdownLi# */ {
             this.toggleElement = this.element.querySelector('[data-toggle="dropdown"]');
             if (this.toggleElement === null){
                 console.error('there is no element with attribute data-toggle="dropdown" in your dropdown component');
-            }
+            } else {
+                var self = this;
 
-            var self = this;
+                this.dropdownHoverHandler = {
+                    handleMouseover: function(event) {
+                        self.show();
+                    },
+                    handleMouseout: function(event) {
+                        self.hide();
+                    }
+                };
 
-            this.dropdownHoverHandler = {
-                handleMouseover: function(event) {
-                    self.show();
-                },
-                handleMouseout: function(event) {
-                    self.hide();
+                if(window.Touch) {
+                    this.type = "click";
                 }
-            };
 
-            if(window.Touch) {
-                this.type = "click";
-            }
-
-            if (this.type === "hover") {
-                if (this.toggleElement !== null) {
+                if (this.type === "hover") {
                     this.element.addEventListener("mouseover", this.dropdownHoverHandler, false);
                     this.element.addEventListener("mouseout", this.dropdownHoverHandler, false);
+                } else if (this.type === "click") {
+                    this._addEventListeners();
+                    this._pressComposer.addEventListener("pressStart", this, false);
                 } else {
-                    console.error('there is no element with attribute data-toggle="dropdown" in your dropdown component');
+                    console.error("unknown dropdown type : " + this.type);
                 }
-            } else if (this.type === "click") {
-                this._addEventListeners();
-                this._pressComposer.addEventListener("pressStart", this, false);
-            } else {
-                console.error("unknown dropdown type : " + this.type);
             }
         }
     },
@@ -111,19 +107,17 @@ exports.Dropdown = Component.specialize( /** @lends DropdownLi# */ {
 
             this.hide();
 
-            if (this.type === "hover") {
-                if (this.toggleElement !== null) {
+            if (this.toggleElement !== null) {
+                if (this.type === "hover") {
                     this.element.removeEventListener("mouseover", this.dropdownHoverHandler, false);
                     this.element.removeEventListener("mouseout", this.dropdownHoverHandler, false);
-                } else {
-                    console.error('there is no element with attribute data-toggle="dropdown" in your dropdown component');
+                } else if (this.type === "click") {
+                    this._removeEventListeners();
+                    this._pressComposer.removeEventListener("pressStart", this, false);
                 }
-            } else if (this.type === "click") {
-                this._removeEventListeners();
-                this._pressComposer.removeEventListener("pressStart", this, false);
-            }
 
-            this.toggleElement = null;
+                this.toggleElement = null;
+            }
         }
     },
 
@@ -206,22 +200,28 @@ exports.Dropdown = Component.specialize( /** @lends DropdownLi# */ {
 
     _addEventListeners: {
         value: function() {
+            if(!this.toggleElement)
+                return;
+
             // support touching the scale to select only in Desktop
             if(window.Touch) {
-                this.element.addEventListener('touchstart', this, false);
+                this.toggleElement.addEventListener('touchstart', this, false);
             } else {
-                this.element.addEventListener('click', this, false);
+                this.toggleElement.addEventListener('click', this, false);
             }
         }
     },
 
     _removeEventListeners: {
         value: function() {
+            if(!this.toggleElement)
+                return;
+
             // support touching the scale to select only in Desktop
             if(window.Touch) {
-                this.element.removeEventListener('touchstart', this, false);
+                this.toggleElement.removeEventListener('touchstart', this, false);
             } else {
-                this.element.removeEventListener('click', this, false);
+                this.toggleElement.removeEventListener('click', this, false);
             }
         }
     },
