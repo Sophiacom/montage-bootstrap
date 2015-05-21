@@ -2,6 +2,7 @@
  * @module /ui/button.reel
  */
 var AbstractButton = require("montage/ui/base/abstract-button").AbstractButton;
+    Tooltip = require("ui/tooltip.reel").Tooltip;
 
 /**
  * @class Button
@@ -58,6 +59,18 @@ exports.Button = AbstractButton.specialize( /** @lends Button# */ {
         value: "button"
     },
 
+    tooltipClass: {
+        value: null
+    },
+
+    tooltipPlacement: {
+        value: null
+    },
+
+    tooltipTitle: {
+        value: null
+    },
+
     enterDocument: {
         value: function(firstTime) {
             this.super(firstTime);
@@ -80,6 +93,10 @@ exports.Button = AbstractButton.specialize( /** @lends Button# */ {
                     "classList.has('btn-xs')": {"<-": "size == 'xs'"},
                     "element.type": {"<-": "type"}
                 });
+
+                if(this.tooltipTitle) {
+                    this._tooltip = new Tooltip(this, this.tooltipTitle, this.tooltipPlacement, this.tooltipClass);
+                }
             }
 
             this.addPathChangeListener("glyphicon.defined()", this, "handleGlyphiconChange");
@@ -91,6 +108,11 @@ exports.Button = AbstractButton.specialize( /** @lends Button# */ {
         value: function() {
             this.removePathChangeListener("glyphicon.defined()", this);
             this.removePathChangeListener("fontAwesome.defined()", this);
+
+            if(this.tooltipTitle) {
+                this._tooltip.dispose();
+                this._tooltip = null;
+            }
         }
     },
 
