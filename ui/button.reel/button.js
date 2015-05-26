@@ -93,14 +93,14 @@ exports.Button = AbstractButton.specialize( /** @lends Button# */ {
                     "classList.has('btn-xs')": {"<-": "size == 'xs'"},
                     "element.type": {"<-": "type"}
                 });
-
-                if(this.tooltipTitle) {
-                    this._tooltip = new Tooltip(this, this.tooltipTitle, this.tooltipPlacement, this.tooltipClass);
-                }
             }
 
             this.addPathChangeListener("glyphicon.defined()", this, "handleGlyphiconChange");
             this.addPathChangeListener("fontAwesome.defined()", this, "handleFontAwesomeChange");
+
+            if(this.tooltipTitle) {
+                this._tooltip = new Tooltip(this, this.tooltipTitle, this.tooltipPlacement, this.tooltipClass);
+            }
         }
     },
 
