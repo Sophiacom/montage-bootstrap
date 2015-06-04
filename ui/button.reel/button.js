@@ -2,7 +2,7 @@
  * @module /ui/button.reel
  */
 var AbstractButton = require("montage/ui/base/abstract-button").AbstractButton;
-    Tooltip = require("ui/tooltip.reel").Tooltip;
+var Tooltip = require("core/tooltip").Tooltip;
 
 /**
  * @class Button
@@ -91,7 +91,9 @@ exports.Button = AbstractButton.specialize( /** @lends Button# */ {
                     "classList.has('btn-lg')": {"<-": "size == 'lg'"},
                     "classList.has('btn-sm')": {"<-": "size == 'sm'"},
                     "classList.has('btn-xs')": {"<-": "size == 'xs'"},
-                    "element.type": {"<-": "type"}
+                    "element.type": {"<-": "type"},
+                    "_tooltip.text": {"<-": "tooltipTitle"},
+                    "_tooltip.placement": {"<-": "tooltipPlacement"}
                 });
             }
 
@@ -99,7 +101,7 @@ exports.Button = AbstractButton.specialize( /** @lends Button# */ {
             this.addPathChangeListener("fontAwesome.defined()", this, "handleFontAwesomeChange");
 
             if(this.tooltipTitle) {
-                this._tooltip = new Tooltip(this, this.tooltipTitle, this.tooltipPlacement, this.tooltipClass);
+                this._tooltip = new Tooltip(this, this.tooltipClass);
             }
         }
     },

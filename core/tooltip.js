@@ -1,21 +1,37 @@
 /**
- * @module /ui/tooltip.reel
+ * @module core/tooltip
  */
-var Component = require("montage/ui/component").Component;
-
+var Montage = require("montage/core/core").Montage;
 /**
  * @class Tooltip
- * @extends Component
+ * @extends Montage
  */
-exports.Tooltip = Component.specialize(/** @lends Tooltip# */ {
-    hasTemplate: {value: false},
-
+exports.Tooltip = Montage.specialize(/** @lends Tooltip# */ {
     constructor: {
-        value: function Tooltip(targetComponent, title, placement, cssClass) {
+        value: function Tooltip(targetComponent, placement, cssClass) {
             this.super();
 
-            this._init(targetComponent, title, placement, cssClass);
+            this.defineBindings({
+                "text": {"<->": "_textElement.textContent"},
+                "_tooltipElement.classList.has('bottom')": {"<-": "placement == 'bottom'"},
+                "_tooltipElement.classList.has('top')": {"<-": "placement == 'top'"},
+                "_tooltipElement.classList.has('left')": {"<-": "placement == 'left'"},
+                "_tooltipElement.classList.has('right')": {"<-": "placement == 'right'"}
+            });
+
+            this._init(targetComponent, cssClass);
         }
+    },
+
+    /**
+     * The message the tooltip should display
+     */
+    text: {
+        value: null
+    },
+
+    placement: {
+        value: "top"
     },
 
     /**
@@ -26,24 +42,13 @@ exports.Tooltip = Component.specialize(/** @lends Tooltip# */ {
     },
 
     /**
-     * The placement of the tooltip.
-     * values: left, top, right, bottom. default top
-     */
-    _placement: {
-        value: "top"
-    },
-
-    /**
      * This property should point to the component which need tooltip.
      */
     _targetComponent: {
         value: null
     },
 
-    /**
-     * The message the tooltip should display
-     */
-    _title: {
+    _textElement: {
         value: null
     },
 
@@ -56,60 +61,59 @@ exports.Tooltip = Component.specialize(/** @lends Tooltip# */ {
     },
 
     _init: {
-        value: function (targetComponent, title, placement, cssClass) {
-            if (targetComponent && title) {
-                this._targetComponent = targetComponent;
-                this._title = title;
+        value: function (targetComponent, cssClass) {
+            if (!targetComponent) {
+                console.error("tooltip requires a target component");
+                return;
+            }
 
-                if(placement && (placement === "left" || placement === "top" || placement === "right" || placement === "bottom")) {
-                    this._placement = placement;
+            this._targetComponent = targetComponent;
+
+            this._cssClass = cssClass;
+
+            if(window.Touch) {
+                this._targetComponent.addEventListener("focusin", this, false);
+                this._targetComponent.addEventListener("focusout", this, false);
+
+                this._targetComponent.element.addEventListener("focusin", this, false);
+                this._targetComponent.element.addEventListener("focusout", this, false);
+            } else {
+                this._targetComponent.addEventListener("mouseover", this, false);
+                this._targetComponent.addEventListener("mouseout", this, false);
+
+                this._targetComponent.element.addEventListener("mouseover", this, false);
+                this._targetComponent.element.addEventListener("mouseout", this, false);
+            }
+
+            if(!this._tooltipElement) {
+                this._tooltipElement = document.createElement("div");
+                this._tooltipElement.classList.add("tooltip");
+
+                var divTooltipArrow = document.createElement("div");
+                divTooltipArrow.className = "tooltip-arrow";
+                if(this._cssClass) {
+                    divTooltipArrow.classList.add(this._cssClass);
+                }
+                this._tooltipElement.appendChild(divTooltipArrow);
+
+                var divTooltipInner = document.createElement("div");
+                divTooltipInner.className = "tooltip-inner";
+                if(this._cssClass) {
+                    divTooltipInner.classList.add(this._cssClass);
                 }
 
-                this._cssClass = cssClass;
+                this._textElement = divTooltipInner;
 
-                if(window.Touch) {
-                    this._targetComponent.addEventListener("focusin", this, false);
-                    this._targetComponent.addEventListener("focusout", this, false);
+                this._tooltipElement.appendChild(divTooltipInner);
 
-                    this._targetComponent.element.addEventListener("focusin", this, false);
-                    this._targetComponent.element.addEventListener("focusout", this, false);
-                } else {
-                    this._targetComponent.addEventListener("mouseover", this, false);
-                    this._targetComponent.addEventListener("mouseout", this, false);
-
-                    this._targetComponent.element.addEventListener("mouseover", this, false);
-                    this._targetComponent.element.addEventListener("mouseout", this, false);
-                }
-
-                if(!this._tooltipElement) {
-                    this._tooltipElement = document.createElement("div");
-                    this._tooltipElement.classList.add("tooltip");
-                    this._tooltipElement.classList.add(this._placement);
-
-                    var divTooltipArrow = document.createElement("div");
-                    divTooltipArrow.className = "tooltip-arrow";
-                    if(this._cssClass) {
-                        divTooltipArrow.classList.add(this._cssClass);
-                    }
-                    this._tooltipElement.appendChild(divTooltipArrow);
-
-                    var divTooltipInner = document.createElement("div");
-                    divTooltipInner.className = "tooltip-inner";
-                    if(this._cssClass) {
-                        divTooltipInner.classList.add(this._cssClass);
-                    }
-                    divTooltipInner.textContent = this._title;
-                    this._tooltipElement.appendChild(divTooltipInner);
-
-                    this._tooltipParentElement = this._targetComponent.element.ownerDocument.body;
-                }
+                this._tooltipParentElement = this._targetComponent.element.ownerDocument.body;
             }
         }
     },
 
     dispose: {
         value: function() {
-            if (this._targetComponent && this._title) {
+            if (this._targetComponent && this.text) {
                 this._hideTooltip();
 
                 if(window.Touch) {
@@ -127,10 +131,11 @@ exports.Tooltip = Component.specialize(/** @lends Tooltip# */ {
                 }
 
                 this._targetComponent = null;
-                this._title = null;
-                this._placement = "top";
+                this.text = null;
+                this.placement = "top";
                 this._tooltipElement = null;
                 this._tooltipParentElement = null;
+                this._textElement = null;
             }
         }
     },
@@ -194,11 +199,11 @@ exports.Tooltip = Component.specialize(/** @lends Tooltip# */ {
             var left = tippedElementRect.left + window.pageXOffset;
             var top = tippedElementRect.bottom + window.pageYOffset;
 
-            if(this._placement === 'top') {
+            if(this.placement === 'top') {
                 return { top: top - tippedElementRect.height - height, left: left + tippedElementRect.width / 2 - width / 2};
-            } else if(this._placement === 'bottom') {
+            } else if(this.placement === 'bottom') {
                 return { top: top, left: left + tippedElementRect.width / 2 - width / 2};
-            } else if(this._placement === 'left') {
+            } else if(this.placement === 'left') {
                 return { top: top - tippedElementRect.height/2 - height/2, left: left - width};
             } else {
                 return { top: top - tippedElementRect.height/2 - height/2, left: left + tippedElementRect.width};
