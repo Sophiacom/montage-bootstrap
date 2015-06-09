@@ -35,7 +35,10 @@
                     "capture": true,
                     "listener": {"@": "owner"}
                 }
-            ]
+            ],
+            "bindings": {
+                "enabled": {"<-": "@owner.data.defined()"}
+            }
         }
     }
     </script>
@@ -44,7 +47,7 @@
     <div data-montage-id="owner" class="input-group InputFile">
         <span class="input-group-btn">
             <span class="btn btn-primary btn-file">
-                <span class="glyphicon glyphicon-file"></span>
+                <span class="fa fa-upload"></span>
                 <input type="file" data-montage-id="inputFile" accept="application/x-pkcs12" />
             </span>
         </span>
