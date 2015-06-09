@@ -67,7 +67,7 @@ exports.Button = AbstractButton.specialize( /** @lends Button# */ {
         value: null
     },
 
-    tooltipTitle: {
+    tooltipText: {
         value: null
     },
 
@@ -92,7 +92,7 @@ exports.Button = AbstractButton.specialize( /** @lends Button# */ {
                     "classList.has('btn-sm')": {"<-": "size == 'sm'"},
                     "classList.has('btn-xs')": {"<-": "size == 'xs'"},
                     "element.type": {"<-": "type"},
-                    "_tooltip.text": {"<-": "tooltipTitle"},
+                    "_tooltip.text": {"<-": "tooltipText"},
                     "_tooltip.placement": {"<-": "tooltipPlacement"}
                 });
             }
@@ -100,7 +100,7 @@ exports.Button = AbstractButton.specialize( /** @lends Button# */ {
             this.addPathChangeListener("glyphicon.defined()", this, "handleGlyphiconChange");
             this.addPathChangeListener("fontAwesome.defined()", this, "handleFontAwesomeChange");
 
-            if(this.tooltipTitle) {
+            if(this.tooltipText) {
                 this._tooltip = new Tooltip(this, this.tooltipClass);
             }
         }
@@ -111,7 +111,7 @@ exports.Button = AbstractButton.specialize( /** @lends Button# */ {
             this.removePathChangeListener("glyphicon.defined()", this);
             this.removePathChangeListener("fontAwesome.defined()", this);
 
-            if(this.tooltipTitle) {
+            if(this.tooltipText) {
                 this._tooltip.dispose();
                 this._tooltip = null;
             }
