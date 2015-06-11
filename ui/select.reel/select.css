@@ -1,24 +1,30 @@
-.Select {
+.select {
 
 }
 
-.Select .dropdown-menu {
+.select .dropdown-menu {
     width: 100%;
 }
 
-.Select .dropdown-value, .Select .dropdown-menu>li>a {
-	overflow: hidden;
-	text-overflow: ellipsis;
+.select .dropdown-value, .select .dropdown-menu>li>a {
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-.Select .dropdown-value {
-	display: inline-block;
-	width: 100%;
-	vertical-align: middle;
-	padding-right: 12px;
+.select .dropdown-value {
+    display: inline-block;
+    width: 100%;
+    vertical-align: middle;
+    padding-right: 12px;
 }
 
-.Select .caret-wrapper {
-	position: absolute;
-  	right: 12px;
+.select .caret-wrapper {
+    position: absolute;
+    right: 12px;
+}
+
+.select > div.dropdown > ul {
+    max-height: 400px;
+    overflow: scroll;
+    z-index: 200;
 }
