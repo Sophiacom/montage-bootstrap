@@ -56,7 +56,7 @@ exports.Select = Component.specialize( /** @lends Select# */ {
         value: null
     },
 
-    nullLabel: {
+    noSelectionLabel: {
         value: "N/A"
     },
 

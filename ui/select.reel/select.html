@@ -32,7 +32,7 @@
                 },
                 "bindings": {
                     "enabled": {"<-": "@owner.enabled"},
-                    "element.title": {"<-": "@owner._label(@owner._selected) ?? @owner.nullLabel"}
+                    "element.title": {"<-": "@owner._label(@owner._selected) ?? @owner.noSelectionLabel"}
                 }
             },
             "dropdownText": {
@@ -41,7 +41,7 @@
                     "element": {"#": "dropdownText"}
                 },
                 "bindings": {
-                    "value": {"<-": "@owner._label(@owner._selected) ?? @owner.nullLabel"}
+                    "value": {"<-": "@owner._label(@owner._selected) ?? @owner.noSelectionLabel"}
                 }
             },
 
@@ -61,8 +61,8 @@
                     "element": {"#": "entry"}
                 },
                 "bindings": {
-                    "label": {"<-": "@owner._label(@list:iteration.object) ?? @owner.nullLabel"},
-                    "element.title": {"<-": "@owner._label(@list:iteration.object) ?? @owner.nullLabel"},
+                    "label": {"<-": "@owner._label(@list:iteration.object) ?? @owner.noSelectionLabel"},
+                    "element.title": {"<-": "@owner._label(@list:iteration.object) ?? @owner.noSelectionLabel"},
                     "detail.entry": {"<-": "@list:iteration.object"}
                 },
                 "listeners": [{
