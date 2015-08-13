@@ -403,7 +403,7 @@ exports.Timepicker = Component.specialize( /** @lends Timepicker# */ {
     // Zone offset in milliseconds
     zoneOffset: {
         get: function(){
-            return Moment().zone() * 60 * 1000;
+            return Moment().utcOffset() * 60 * 1000;
         }
     },
 
@@ -423,7 +423,7 @@ exports.Timepicker = Component.specialize( /** @lends Timepicker# */ {
             if(this._refreshing)
                 return;
 
-            var milliseconds = value.valueOf() - this.zoneOffset;
+            var milliseconds = value.valueOf() + this.zoneOffset;
 
             var totalHour = Math.floor(milliseconds / (60 * 60 * 1000)) % 24;
             var rest = milliseconds % (60 * 60 * 1000);
