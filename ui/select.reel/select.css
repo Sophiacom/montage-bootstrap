@@ -25,6 +25,6 @@
 
 .select > div.dropdown > ul {
     max-height: 400px;
-    overflow: overlay;
+    overflow: auto;
     z-index: 200;
 }
