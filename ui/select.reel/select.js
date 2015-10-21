@@ -118,12 +118,14 @@ exports.Select = Component.specialize( /** @lends Select# */ {
             }
 
             this.addPathChangeListener("content", this, "_updateValue");
+            this.addPathChangeListener("allowsNull", this, "_updateValue");
         }
     },
     exitDocument: {
         value: function() {
             this.super();
-
+            
+            this.removePathChangeListener("allowsNull", this);
             this.removePathChangeListener("content", this);
         }
     },
